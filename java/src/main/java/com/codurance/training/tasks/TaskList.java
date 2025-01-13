@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, Tasks> projects = new LinkedHashMap<>();
+    private final Projects projects = new Projects();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -70,16 +69,7 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        showProjects(projects, out);
-    }
-
-    private static void showProjects(Map<String, Tasks> projects, PrintWriter printWriter) {
-        for (Map.Entry<String, Tasks> project : projects.entrySet()) {
-            printWriter.println(project.getKey());
-            Tasks tasks = project.getValue();
-            printWriter.print(tasks.format("    "));
-            printWriter.println();
-        }
+        out.print(projects);
     }
 
     private void add(String commandLine) {
