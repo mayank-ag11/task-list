@@ -295,6 +295,30 @@ public class TaskListTest {
         assertEquals(expectedOutput, stringWriter.toString());
     }
 
+    @Test
+    public void executeInvalidCommand() {
+        // Arrange
+        String input = """
+                invalidCommand
+                quit
+                """;
+        BufferedReader in = new BufferedReader(new StringReader(input));
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter out = new PrintWriter(stringWriter);
+
+        TaskList taskList = new TaskList(in, out);
+
+        // Act
+        taskList.run();
+
+        // Assert
+        String expectedOutput = buildExpectedOutput(
+                "> I don't know what the command \"invalidCommand\" is.",
+                "> "
+        );
+        assertEquals(expectedOutput, stringWriter.toString());
+    }
+
     private String buildExpectedOutput(String... lines) {
         return String.join(System.lineSeparator(), lines);
     }
