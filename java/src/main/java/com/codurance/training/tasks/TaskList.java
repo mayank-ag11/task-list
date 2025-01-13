@@ -10,7 +10,7 @@ import java.util.Map;
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, Tasks> tasks = new LinkedHashMap<>();
+    private final Map<String, Tasks> projects = new LinkedHashMap<>();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -70,7 +70,7 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        for (Map.Entry<String, Tasks> project : tasks.entrySet()) {
+        for (Map.Entry<String, Tasks> project : projects.entrySet()) {
             out.println(project.getKey());
             Tasks tasks = project.getValue();
             out.print(tasks.format("    "));
@@ -90,11 +90,11 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        tasks.put(name, new Tasks());
+        projects.put(name, new Tasks());
     }
 
     private void addTask(String project, String description) {
-        Tasks projectTasks = tasks.get(project);
+        Tasks projectTasks = projects.get(project);
         if (projectTasks == null) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
@@ -113,7 +113,7 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, Tasks> project : tasks.entrySet()) {
+        for (Map.Entry<String, Tasks> project : projects.entrySet()) {
             Tasks tasks = project.getValue();
             if (tasks.toggleTaskById(id, done)) return;
         }
