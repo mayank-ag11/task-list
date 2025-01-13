@@ -73,14 +73,14 @@ public class ProjectsTest {
     }
 
     @Test
-    public void toggleTaskAsDone() {
+    public void markTaskAsDone() {
         // Arrange
         Projects projects = new Projects();
         projects.addProject("TestProject");
         projects.addTaskToProjectWithName("TestProject", new Task(1, "Task1", false));
 
         // Act
-        projects.toggleTaskById(1, true);
+        projects.markTaskByIdAsDone(1);
 
         // Assert
         String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
@@ -92,14 +92,14 @@ public class ProjectsTest {
     }
 
     @Test
-    public void toggleTaskAsNotDone() {
+    public void markTaskAsNotDone() {
         // Arrange
         Projects projects = new Projects();
         projects.addProject("TestProject");
         projects.addTaskToProjectWithName("TestProject", new Task(1, "Task1", true));
 
         // Act
-        projects.toggleTaskById(1, false);
+        projects.markTaskByIdAsUnDone(1);
 
         // Assert
         String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
@@ -111,13 +111,23 @@ public class ProjectsTest {
     }
 
     @Test
-    public void toggleTaskWithNonExistingId() {
+    public void markTaskAsDoneWithNonExistingId() {
         // Arrange
         Projects projects = new Projects();
         projects.addProject("TestProject");
 
         // Act & Assert
-        assertFalse(projects.toggleTaskById(1, false));
+        assertFalse(projects.markTaskByIdAsDone(1));
+    }
+
+    @Test
+    public void markTaskAsNotDoneWithNonExistingId() {
+        // Arrange
+        Projects projects = new Projects();
+        projects.addProject("TestProject");
+
+        // Act & Assert
+        assertFalse(projects.markTaskByIdAsUnDone(1));
     }
 
     @Test

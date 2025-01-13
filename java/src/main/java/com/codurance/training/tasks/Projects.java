@@ -18,10 +18,18 @@ public class Projects extends LinkedHashMap<String, Tasks> {
         return true;
     }
 
-    public boolean toggleTaskById(int id, boolean done) {
+    public boolean markTaskByIdAsDone(int id) {
         for (Map.Entry<String, Tasks> project : this.entrySet()) {
             Tasks tasks = project.getValue();
-            if (tasks.toggleTaskById(id, done)) return true;
+            if (tasks.markTaskByIdAsDone(id)) return true;
+        }
+        return false;
+    }
+
+    public boolean markTaskByIdAsUnDone(int id) {
+        for (Map.Entry<String, Tasks> project : this.entrySet()) {
+            Tasks tasks = project.getValue();
+            if (tasks.markTaskByIdAsUnDone(id)) return true;
         }
         return false;
     }

@@ -4,10 +4,20 @@ import java.util.ArrayList;
 
 public class Tasks extends ArrayList<Task> {
 
-    public boolean toggleTaskById(int id, boolean done) {
+    public boolean markTaskByIdAsDone(int id) {
         for (Task task : this) {
             if (task.getId() == id) {
-                task.setDone(done);
+                task.markAsDone();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean markTaskByIdAsUnDone(int id) {
+        for (Task task : this) {
+            if (task.getId() == id) {
+                task.markAsUnDone();
                 return true;
             }
         }

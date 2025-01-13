@@ -94,16 +94,20 @@ public final class TaskList implements Runnable {
     }
 
     private void check(String idString) {
-        setDone(idString, true);
+        int id = Integer.parseInt(idString);
+        if (!projects.markTaskByIdAsDone(id)) {
+            noTaskForTheIdError(id);
+        }
     }
 
     private void uncheck(String idString) {
-        setDone(idString, false);
+        int id = Integer.parseInt(idString);
+        if (!projects.markTaskByIdAsUnDone(id)) {
+            noTaskForTheIdError(id);
+        }
     }
 
-    private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
-        if (projects.toggleTaskById(id, done)) return;
+    private void noTaskForTheIdError(int id) {
         out.printf("Could not find a task with an ID of %d.", id);
         out.println();
     }

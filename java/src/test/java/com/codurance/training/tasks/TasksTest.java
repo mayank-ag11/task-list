@@ -52,13 +52,13 @@ public class TasksTest {
     }
 
     @Test
-    public void toggleATaskAsDone() {
+    public void markATaskAsDone() {
         // Arrange
         Tasks tasks = new Tasks();
         tasks.add(new Task(1, "Task1", false));
 
         // Act
-        tasks.toggleTaskById(1, true);
+        tasks.markTaskByIdAsDone(1);
 
         // Assert
         String expectedOutput = "[x] 1: Task1" + System.lineSeparator();
@@ -66,29 +66,42 @@ public class TasksTest {
     }
 
     @Test
-    public void toggleTaskWithNonExistingId() {
+    public void markATaskAsUnDone() {
+        // Arrange
+        Tasks tasks = new Tasks();
+        tasks.add(new Task(1, "Task1", true));
+
+        // Act
+        tasks.markTaskByIdAsUnDone(1);
+
+        // Assert
+        String expectedOutput = "[ ] 1: Task1" + System.lineSeparator();
+        assertEquals(expectedOutput, tasks.format(""));
+    }
+
+    @Test
+    public void markTaskAsDoneWithNonExistingId() {
         // Arrange
         Tasks tasks = new Tasks();
         tasks.add(new Task(1, "Task1", false));
 
         // Act
-        boolean output = tasks.toggleTaskById(999, true);
+        boolean output = tasks.markTaskByIdAsDone(999);
 
         // Assert
         assertFalse(output);
     }
 
     @Test
-    public void handle() {
+    public void markTaskAsUnDoneWithNonExistingId() {
         // Arrange
         Tasks tasks = new Tasks();
-        tasks.add(new Task(1, "Task1", true));
+        tasks.add(new Task(1, "Task1", false));
 
         // Act
-        tasks.toggleTaskById(1, false);
+        boolean output = tasks.markTaskByIdAsUnDone(999);
 
         // Assert
-        String expectedOutput = "[ ] 1: Task1" + System.lineSeparator();
-        assertEquals(expectedOutput, tasks.format(""));
+        assertFalse(output);
     }
 }
