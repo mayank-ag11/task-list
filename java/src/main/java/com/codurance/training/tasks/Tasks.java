@@ -6,7 +6,7 @@ public class Tasks extends ArrayList<Task> {
 
     public boolean markTaskByIdAsDone(int id) {
         for (Task task : this) {
-            if (task.getId() == id) {
+            if (task.hasId(id)) {
                 task.markAsDone();
                 return true;
             }
@@ -16,7 +16,7 @@ public class Tasks extends ArrayList<Task> {
 
     public boolean markTaskByIdAsUnDone(int id) {
         for (Task task : this) {
-            if (task.getId() == id) {
+            if (task.hasId(id)) {
                 task.markAsUnDone();
                 return true;
             }

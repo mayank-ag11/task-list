@@ -6,6 +6,16 @@ import static org.junit.Assert.*;
 
 public class TaskTest {
     @Test
+    public void testHasId() {
+        // Arrange
+        Task task = new Task(1, "Task1", true);
+
+        // Act & Assert
+        assertTrue(task.hasId(1));
+        assertFalse(task.hasId(99));
+    }
+
+    @Test
     public void testToStringForADoneTask() {
         // Arrange
         Task task = new Task(1, "Task1", true);

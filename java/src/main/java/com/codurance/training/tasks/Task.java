@@ -15,6 +15,10 @@ public final class Task {
         return id;
     }
 
+    public boolean hasId(int id) {
+        return this.getId() == id;
+    }
+
     public String getDescription() {
         return description;
     }
