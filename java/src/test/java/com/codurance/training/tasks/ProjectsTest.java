@@ -136,7 +136,7 @@ public class ProjectsTest {
         Projects projects = new Projects();
         projects.addProject("TestProject");
 
-        projects.get("TestProject").add(new Task(1, "Task1", true));
+        projects.get("TestProject").addTask(new Task(1, "Task1", true));
 
         // Act & Assert
         String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
@@ -155,8 +155,8 @@ public class ProjectsTest {
         projects.addProject("TestProject");
         projects.addProject("TestProject2");
 
-        projects.get("TestProject").add(new Task(1, "Task1", true));
-        projects.get("TestProject2").add(new Task(2, "Task2", true));
+        projects.get("TestProject").addTask(new Task(1, "Task1", true));
+        projects.get("TestProject2").addTask(new Task(2, "Task2", true));
 
         // Act & Assert
         String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
