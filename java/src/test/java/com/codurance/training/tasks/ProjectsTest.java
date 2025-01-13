@@ -14,11 +14,13 @@ public class ProjectsTest {
         projects.get("TestProject").add(new Task(1, "Task1", true));
 
         // Act & Assert
-        String expected = "TestProject" + System.lineSeparator() +
-                "    [x] 1: Task1" + System.lineSeparator() +
-                System.lineSeparator();
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "TestProject",
+                "    [x] 1: Task1",
+                ""
+        );
 
-        assertEquals(expected, projects.toString());
+        assertEquals(expectedOutput, projects.toString());
     }
 
     @Test
@@ -32,13 +34,15 @@ public class ProjectsTest {
         projects.get("TestProject2").add(new Task(2, "Task2", true));
 
         // Act & Assert
-        String expected = "TestProject" + System.lineSeparator() +
-                "    [x] 1: Task1" + System.lineSeparator() +
-                System.lineSeparator() +
-                "TestProject2" + System.lineSeparator() +
-                "    [x] 2: Task2" + System.lineSeparator() +
-                System.lineSeparator();
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "TestProject",
+                "    [x] 1: Task1",
+                "",
+                "TestProject2",
+                "    [x] 2: Task2",
+                ""
+        );
 
-        assertEquals(expected, projects.toString());
+        assertEquals(expectedOutput, projects.toString());
     }
 }

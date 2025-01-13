@@ -30,8 +30,10 @@ public class TasksTest {
         String output = tasks.format("");
 
         // Assert
-        String expectedOutput = "[ ] 1: Task1" + System.lineSeparator() +
-                "[ ] 2: Task2" + System.lineSeparator();
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "[ ] 1: Task1",
+                "[ ] 2: Task2"
+        );
         assertEquals(expectedOutput, output);
     }
 

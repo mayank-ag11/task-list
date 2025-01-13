@@ -25,7 +25,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > TestProject",
                 "",
                 "> "
@@ -53,7 +53,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > > TestProject",
                 "    [ ] 1: Task1",
                 "    [ ] 2: Task2",
@@ -85,7 +85,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > > > > TestProject",
                 "    [ ] 1: Task1",
                 "    [ ] 2: Task2",
@@ -118,7 +118,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > > TestProject",
                 "    [x] 1: Task1",
                 "",
@@ -145,7 +145,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > TestProject",
                 "",
                 "> "
@@ -172,7 +172,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > TestProject",
                 "    [ ] 1: Task1",
                 "",
@@ -199,7 +199,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> Could not find a project with the name \"TestProject\".",
                 "> > "
         );
@@ -226,7 +226,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > > TestProject",
                 "    [x] 1: Task1",
                 "",
@@ -256,7 +256,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > > > TestProject",
                 "    [ ] 1: Task1",
                 "",
@@ -285,7 +285,7 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> > > Could not find a task with an ID of 2.",
                 "> TestProject",
                 "    [ ] 1: Task1",
@@ -312,14 +312,10 @@ public class TaskListTest {
         taskList.run();
 
         // Assert
-        String expectedOutput = buildExpectedOutput(
+        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
                 "> I don't know what the command \"invalidCommand\" is.",
                 "> "
         );
         assertEquals(expectedOutput, stringWriter.toString());
-    }
-
-    private String buildExpectedOutput(String... lines) {
-        return String.join(System.lineSeparator(), lines);
     }
 }
