@@ -84,7 +84,7 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        projects.put(name, new Tasks());
+        projects.addProject(name);
     }
 
     private void addTask(String project, String description) {

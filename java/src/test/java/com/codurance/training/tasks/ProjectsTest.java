@@ -6,10 +6,45 @@ import static org.junit.Assert.*;
 
 public class ProjectsTest {
     @Test
+    public void addProject() {
+        // Arrange
+        Projects projects = new Projects();
+
+        // Act
+        projects.addProject("TestProject");
+
+        // Assert
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "TestProject",
+                ""
+        );
+        assertEquals(expectedOutput, projects.toString());
+    }
+
+    @Test
+    public void addAFewProjects() {
+        // Arrange
+        Projects projects = new Projects();
+
+        // Act
+        projects.addProject("TestProject");
+        projects.addProject("TestProject2");
+
+        // Assert
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "TestProject",
+                "",
+                "TestProject2",
+                ""
+        );
+        assertEquals(expectedOutput, projects.toString());
+    }
+
+    @Test
     public void addTaskToAnExistingProject() {
         // Arrange
         Projects projects = new Projects();
-        projects.put("TestProject", new Tasks());
+        projects.addProject("TestProject");
 
         // Act
         boolean taskAddedSuccessfully  = projects.addTaskToProjectWithName("TestProject", new Task(1, "Task1", true));
@@ -41,7 +76,7 @@ public class ProjectsTest {
     public void formatProjectsContainingASingleProject() {
         // Arrange
         Projects projects = new Projects();
-        projects.put("TestProject", new Tasks());
+        projects.addProject("TestProject");
 
         projects.get("TestProject").add(new Task(1, "Task1", true));
 
@@ -59,8 +94,8 @@ public class ProjectsTest {
     public void formatProjectsContainingAFewProjects() {
         // Arrange
         Projects projects = new Projects();
-        projects.put("TestProject", new Tasks());
-        projects.put("TestProject2", new Tasks());
+        projects.addProject("TestProject");
+        projects.addProject("TestProject2");
 
         projects.get("TestProject").add(new Task(1, "Task1", true));
         projects.get("TestProject2").add(new Task(2, "Task2", true));

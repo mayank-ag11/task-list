@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class Projects extends LinkedHashMap<String, Tasks> {
 
+    public void addProject(String name) {
+        this.put(name, new Tasks());
+    }
+
     public boolean addTaskToProjectWithName(String project, Task task) {
         Tasks projectTasks = this.get(project);
         if (projectTasks == null) {
