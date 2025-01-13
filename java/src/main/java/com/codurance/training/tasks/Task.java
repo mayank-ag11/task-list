@@ -11,32 +11,20 @@ public final class Task {
         this.done = done;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public boolean hasId(int id) {
-        return this.getId() == id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public boolean isDone() {
-        return done;
+        return this.id == id;
     }
 
     public void markAsDone() {
-        this.done = true;
+        done = true;
     }
 
     public void markAsUnDone() {
-        this.done = false;
+        done = false;
     }
 
     @Override
     public String toString() {
-        return String.format("[%c] %d: %s", (this.isDone() ? 'x' : ' '), this.getId(), this.getDescription());
+        return String.format("[%c] %d: %s", (done ? 'x' : ' '), id, description);
     }
 }
