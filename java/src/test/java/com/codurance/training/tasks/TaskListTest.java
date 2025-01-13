@@ -206,6 +206,65 @@ public class TaskListTest {
         assertEquals(expectedOutput, stringWriter.toString());
     }
 
+    @Test
+    public void checkATask() {
+        // Arrange
+        String input = """
+                add project TestProject
+                add task TestProject Task1
+                check 1
+                show
+                quit
+                """;
+        BufferedReader in = new BufferedReader(new StringReader(input));
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter out = new PrintWriter(stringWriter);
+
+        TaskList taskList = new TaskList(in, out);
+
+        // Act
+        taskList.run();
+
+        // Assert
+        String expectedOutput = buildExpectedOutput(
+                "> > > > TestProject",
+                "    [x] 1: Task1",
+                "",
+                "> "
+        );
+        assertEquals(expectedOutput, stringWriter.toString());
+    }
+
+    @Test
+    public void uncheckATask() {
+        // Arrange
+        String input = """
+                add project TestProject
+                add task TestProject Task1
+                check 1
+                uncheck 1
+                show
+                quit
+                """;
+        BufferedReader in = new BufferedReader(new StringReader(input));
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter out = new PrintWriter(stringWriter);
+
+        TaskList taskList = new TaskList(in, out);
+
+        // Act
+        taskList.run();
+
+        // Assert
+        String expectedOutput = buildExpectedOutput(
+                "> > > > > TestProject",
+                "    [ ] 1: Task1",
+                "",
+                "> "
+        );
+        assertEquals(expectedOutput, stringWriter.toString());
+    }
+
     private String buildExpectedOutput(String... lines) {
         return String.join(System.lineSeparator(), lines);
     }
