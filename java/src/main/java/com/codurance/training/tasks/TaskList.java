@@ -88,13 +88,19 @@ public final class TaskList implements Runnable {
     }
 
     private void addTask(String project, String description) {
-        Tasks projectTasks = projects.get(project);
-        if (projectTasks == null) {
+        if(!addTaskToProjectWithName(project, new Task(nextId(), description, false), projects)) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
-            return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+    }
+
+    private static boolean addTaskToProjectWithName(String project, Task task, Projects projects) {
+        Tasks projectTasks = projects.get(project);
+        if (projectTasks == null) {
+            return false;
+        }
+        projectTasks.add(task);
+        return true;
     }
 
     private void check(String idString) {
