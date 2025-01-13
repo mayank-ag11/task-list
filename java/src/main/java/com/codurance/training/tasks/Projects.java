@@ -18,6 +18,14 @@ public class Projects extends LinkedHashMap<String, Tasks> {
         return true;
     }
 
+    public boolean toggleTaskById(int id, boolean done) {
+        for (Map.Entry<String, Tasks> project : this.entrySet()) {
+            Tasks tasks = project.getValue();
+            if (tasks.toggleTaskById(id, done)) return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

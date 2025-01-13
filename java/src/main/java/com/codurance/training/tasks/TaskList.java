@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
@@ -104,17 +103,9 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        if (toggleTaskById(done, id, projects)) return;
+        if (projects.toggleTaskById(id, done)) return;
         out.printf("Could not find a task with an ID of %d.", id);
         out.println();
-    }
-
-    private static boolean toggleTaskById(boolean done, int id, Projects projects) {
-        for (Map.Entry<String, Tasks> project : projects.entrySet()) {
-            Tasks tasks = project.getValue();
-            if (tasks.toggleTaskById(id, done)) return true;
-        }
-        return false;
     }
 
     private void help() {

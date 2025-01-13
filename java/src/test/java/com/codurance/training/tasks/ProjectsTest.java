@@ -73,6 +73,54 @@ public class ProjectsTest {
     }
 
     @Test
+    public void toggleTaskAsDone() {
+        // Arrange
+        Projects projects = new Projects();
+        projects.addProject("TestProject");
+        projects.addTaskToProjectWithName("TestProject", new Task(1, "Task1", false));
+
+        // Act
+        projects.toggleTaskById(1, true);
+
+        // Assert
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "TestProject",
+                "    [x] 1: Task1",
+                ""
+        );
+        assertEquals(expectedOutput, projects.toString());
+    }
+
+    @Test
+    public void toggleTaskAsNotDone() {
+        // Arrange
+        Projects projects = new Projects();
+        projects.addProject("TestProject");
+        projects.addTaskToProjectWithName("TestProject", new Task(1, "Task1", true));
+
+        // Act
+        projects.toggleTaskById(1, false);
+
+        // Assert
+        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+                "TestProject",
+                "    [ ] 1: Task1",
+                ""
+        );
+        assertEquals(expectedOutput, projects.toString());
+    }
+
+    @Test
+    public void toggleTaskWithNonExistingId() {
+        // Arrange
+        Projects projects = new Projects();
+        projects.addProject("TestProject");
+
+        // Act & Assert
+        assertFalse(projects.toggleTaskById(1, false));
+    }
+
+    @Test
     public void formatProjectsContainingASingleProject() {
         // Arrange
         Projects projects = new Projects();
