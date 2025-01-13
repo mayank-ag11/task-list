@@ -70,11 +70,15 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
+        showProjects(projects, out);
+    }
+
+    private static void showProjects(Map<String, Tasks> projects, PrintWriter printWriter) {
         for (Map.Entry<String, Tasks> project : projects.entrySet()) {
-            out.println(project.getKey());
+            printWriter.println(project.getKey());
             Tasks tasks = project.getValue();
-            out.print(tasks.format("    "));
-            out.println();
+            printWriter.print(tasks.format("    "));
+            printWriter.println();
         }
     }
 
