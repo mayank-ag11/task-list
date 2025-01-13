@@ -4,15 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final Map<String, Tasks> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -72,18 +70,11 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
+        for (Map.Entry<String, Tasks> project : tasks.entrySet()) {
             out.println(project.getKey());
-            List<Task> tasks = project.getValue();
-            showTasks(tasks, out, "    ");
+            Tasks tasks = project.getValue();
+            out.print(tasks.format("    "));
             out.println();
-        }
-    }
-
-    private static void showTasks(List<Task> tasks, PrintWriter printWriter, String indentation) {
-        for (Task task : tasks) {
-            printWriter.print(indentation);
-            printWriter.println(task);
         }
     }
 
@@ -99,11 +90,11 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        tasks.put(name, new ArrayList<Task>());
+        tasks.put(name, new Tasks());
     }
 
     private void addTask(String project, String description) {
-        List<Task> projectTasks = tasks.get(project);
+        Tasks projectTasks = tasks.get(project);
         if (projectTasks == null) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
@@ -122,7 +113,7 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
+        for (Map.Entry<String, Tasks> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {
                 if (task.getId() == id) {
                     task.setDone(done);
