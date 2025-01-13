@@ -104,12 +104,17 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, Tasks> project : projects.entrySet()) {
-            Tasks tasks = project.getValue();
-            if (tasks.toggleTaskById(id, done)) return;
-        }
+        if (toggleTaskById(done, id, projects)) return;
         out.printf("Could not find a task with an ID of %d.", id);
         out.println();
+    }
+
+    private static boolean toggleTaskById(boolean done, int id, Projects projects) {
+        for (Map.Entry<String, Tasks> project : projects.entrySet()) {
+            Tasks tasks = project.getValue();
+            if (tasks.toggleTaskById(id, done)) return true;
+        }
+        return false;
     }
 
     private void help() {
