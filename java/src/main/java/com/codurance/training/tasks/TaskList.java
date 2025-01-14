@@ -1,9 +1,6 @@
 package com.codurance.training.tasks;
 
-import com.codurance.training.commands.AddProjectCommand;
-import com.codurance.training.commands.AddTaskCommand;
-import com.codurance.training.commands.HelpCommand;
-import com.codurance.training.commands.ShowCommand;
+import com.codurance.training.commands.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +36,9 @@ public final class TaskList implements Runnable {
             new ShowCommand(projects, out).execute();
         });
         commandHandlers.put("add", this::add);
-        commandHandlers.put("check", this::check);
+        commandHandlers.put("check", args -> {
+            new CheckCommand(projects, out).execute(args);
+        });
         commandHandlers.put("uncheck", this::uncheck);
         commandHandlers.put("help", args -> {
             new HelpCommand(out).execute();
@@ -86,13 +85,6 @@ public final class TaskList implements Runnable {
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             new AddTaskCommand(projects, out).execute(projectTask[0], projectTask[1]);
-        }
-    }
-
-    private void check(String idString) {
-        int id = Integer.parseInt(idString);
-        if (!projects.markTaskByIdAsDone(id)) {
-            noTaskForTheIdError(id);
         }
     }
 
