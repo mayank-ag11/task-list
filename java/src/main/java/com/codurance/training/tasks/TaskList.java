@@ -1,6 +1,7 @@
 package com.codurance.training.tasks;
 
 import com.codurance.training.commands.HelpCommand;
+import com.codurance.training.commands.ShowCommand;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +35,9 @@ public final class TaskList implements Runnable {
     }
 
     private void initializeCommands() {
-        commandHandlers.put("show", args -> show());
+        commandHandlers.put("show", args -> {
+            new ShowCommand(projects, out).execute();
+        });
         commandHandlers.put("add", this::add);
         commandHandlers.put("check", this::check);
         commandHandlers.put("uncheck", this::uncheck);
@@ -73,10 +76,6 @@ public final class TaskList implements Runnable {
         else {
             error(command);
         }
-    }
-
-    private void show() {
-        out.print(projects);
     }
 
     private void add(String commandLine) {
