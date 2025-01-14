@@ -1,5 +1,7 @@
 package com.codurance.training.tasks;
 
+import com.codurance.training.commands.HelpCommand;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +38,9 @@ public final class TaskList implements Runnable {
         commandHandlers.put("add", this::add);
         commandHandlers.put("check", this::check);
         commandHandlers.put("uncheck", this::uncheck);
-        commandHandlers.put("help", args -> help());
+        commandHandlers.put("help", args -> {
+            new HelpCommand(out).execute();
+        });
     }
 
     public void run() {
@@ -113,16 +117,6 @@ public final class TaskList implements Runnable {
 
     private void noTaskForTheIdError(int id) {
         out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
-    }
-
-    private void help() {
-        out.println("Commands:");
-        out.println("  show");
-        out.println("  add project <project name>");
-        out.println("  add task <project name> <task description>");
-        out.println("  check <task ID>");
-        out.println("  uncheck <task ID>");
         out.println();
     }
 
