@@ -1,5 +1,6 @@
 package com.codurance.training.tasks;
 
+import com.codurance.training.commands.AddProjectCommand;
 import com.codurance.training.commands.HelpCommand;
 import com.codurance.training.commands.ShowCommand;
 
@@ -82,15 +83,11 @@ public final class TaskList implements Runnable {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
+            new AddProjectCommand(projects).execute(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             addTask(projectTask[0], projectTask[1]);
         }
-    }
-
-    private void addProject(String name) {
-        projects.addProject(name);
     }
 
     private void addTask(String project, String description) {
