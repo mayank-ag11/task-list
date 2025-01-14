@@ -39,7 +39,9 @@ public final class TaskList implements Runnable {
         commandHandlers.put("check", args -> {
             new CheckCommand(projects, out).execute(args);
         });
-        commandHandlers.put("uncheck", this::uncheck);
+        commandHandlers.put("uncheck", args -> {
+            new UncheckCommand(projects, out).execute(args);
+        });
         commandHandlers.put("help", args -> {
             new HelpCommand(out).execute();
         });
@@ -86,18 +88,6 @@ public final class TaskList implements Runnable {
             String[] projectTask = subcommandRest[1].split(" ", 2);
             new AddTaskCommand(projects, out).execute(projectTask[0], projectTask[1]);
         }
-    }
-
-    private void uncheck(String idString) {
-        int id = Integer.parseInt(idString);
-        if (!projects.markTaskByIdAsUnDone(id)) {
-            noTaskForTheIdError(id);
-        }
-    }
-
-    private void noTaskForTheIdError(int id) {
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
     }
 
     private void error(String command) {
