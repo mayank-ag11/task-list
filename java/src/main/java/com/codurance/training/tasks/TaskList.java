@@ -1,6 +1,7 @@
 package com.codurance.training.tasks;
 
 import com.codurance.training.commands.AddProjectCommand;
+import com.codurance.training.commands.AddTaskCommand;
 import com.codurance.training.commands.HelpCommand;
 import com.codurance.training.commands.ShowCommand;
 
@@ -18,8 +19,6 @@ public final class TaskList implements Runnable {
     private final Projects projects = new Projects();
     private final BufferedReader in;
     private final PrintWriter out;
-
-    private long lastId = 0;
 
     private final Map<String, Consumer<String>> commandHandlers = new HashMap<>();
 
@@ -86,14 +85,7 @@ public final class TaskList implements Runnable {
             new AddProjectCommand(projects).execute(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1]);
-        }
-    }
-
-    private void addTask(String project, String description) {
-        if(!projects.addTaskToProjectWithName(project, new Task(nextId(), description, false))) {
-            out.printf("Could not find a project with the name \"%s\".", project);
-            out.println();
+            new AddTaskCommand(projects, out).execute(projectTask[0], projectTask[1]);
         }
     }
 
@@ -119,9 +111,5 @@ public final class TaskList implements Runnable {
     private void error(String command) {
         out.printf("I don't know what the command \"%s\" is.", command);
         out.println();
-    }
-
-    private long nextId() {
-        return ++lastId;
     }
 }

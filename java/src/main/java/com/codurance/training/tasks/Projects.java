@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class Projects extends LinkedHashMap<String, Project> {
 
+    private long lastId = 0;
+
     public void addProject(String name) {
         this.put(name, new Project(name));
     }
@@ -40,5 +42,9 @@ public class Projects extends LinkedHashMap<String, Project> {
         }
 
         return stringBuilder.toString();
+    }
+
+    public long nextId() {
+        return ++lastId;
     }
 }
