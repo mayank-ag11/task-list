@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
@@ -14,6 +17,8 @@ public final class TaskList implements Runnable {
 
     private long lastId = 0;
 
+    private final Map<String, Consumer<String>> commandHandlers = new HashMap<>();
+
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
@@ -23,6 +28,15 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
+        initializeCommands();
+    }
+
+    private void initializeCommands() {
+        commandHandlers.put("show", args -> show());
+        commandHandlers.put("add", this::add);
+        commandHandlers.put("check", this::check);
+        commandHandlers.put("uncheck", this::uncheck);
+        commandHandlers.put("help", args -> help());
     }
 
     public void run() {
@@ -45,25 +59,15 @@ public final class TaskList implements Runnable {
     private void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
-        switch (command) {
-            case "show":
-                show();
-                break;
-            case "add":
-                add(commandRest[1]);
-                break;
-            case "check":
-                check(commandRest[1]);
-                break;
-            case "uncheck":
-                uncheck(commandRest[1]);
-                break;
-            case "help":
-                help();
-                break;
-            default:
-                error(command);
-                break;
+        String args = commandRest.length > 1 ? commandRest[1] : "";
+
+        Consumer<String> handler = commandHandlers.get(command);
+
+        if(handler != null) {
+            handler.accept(args);
+        }
+        else {
+            error(command);
         }
     }
 
