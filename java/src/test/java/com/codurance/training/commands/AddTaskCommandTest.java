@@ -31,7 +31,7 @@ public class AddTaskCommandTest {
                 "",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test

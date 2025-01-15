@@ -33,7 +33,7 @@ public class CheckCommandTest {
                 "",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     //TODO missing abstraction in checkcommand - test

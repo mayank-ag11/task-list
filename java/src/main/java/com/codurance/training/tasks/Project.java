@@ -21,8 +21,7 @@ public class Project {
         return tasks.markTaskByIdAsUnDone(id);
     }
 
-    @Override
-    public String toString() {
+    public String format() {
         return name + System.lineSeparator()
                 + tasks.format("    ") + System.lineSeparator();
     }

@@ -19,7 +19,7 @@ public class ProjectTest {
                 "    [x] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, project.toString());
+        assertEquals(expectedOutput, project.format());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ProjectTest {
                 "    [x] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, project.toString());
+        assertEquals(expectedOutput, project.format());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ProjectTest {
                 "    [ ] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, project.toString());
+        assertEquals(expectedOutput, project.format());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ProjectTest {
                 "    [ ] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, project.toString());
+        assertEquals(expectedOutput, project.format());
     }
 
     @Test
@@ -87,6 +87,6 @@ public class ProjectTest {
                 "    [ ] 2: Task2",
                 ""
         );
-        assertEquals(expectedOutput, project.toString());
+        assertEquals(expectedOutput, project.format());
     }
 }

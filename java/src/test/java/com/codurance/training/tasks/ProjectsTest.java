@@ -18,7 +18,7 @@ public class ProjectsTest {
                 "TestProject",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ProjectsTest {
                 "TestProject2",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ProjectsTest {
                 "    [x] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ProjectsTest {
 
         // Assert
         assertFalse(taskAddedSuccessfully);
-        assertEquals("", projects.toString());
+        assertEquals("", projects.format());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class ProjectsTest {
                 "    [x] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ProjectsTest {
                 "    [ ] 1: Task1",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test
@@ -145,7 +145,7 @@ public class ProjectsTest {
                 ""
         );
 
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 
     @Test
@@ -168,6 +168,6 @@ public class ProjectsTest {
                 ""
         );
 
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 }

@@ -14,6 +14,6 @@ public class ShowCommand {
     }
 
     public void execute() {
-        printWriter.print(projects);
+        printWriter.print(projects.format());
     }
 }

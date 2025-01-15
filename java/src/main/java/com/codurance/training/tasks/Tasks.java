@@ -27,7 +27,7 @@ public class Tasks extends ArrayList<Task> {
     public String format(String indentation) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : this) {
-            stringBuilder.append(indentation).append(task).append(System.lineSeparator());
+            stringBuilder.append(indentation).append(task.format()).append(System.lineSeparator());
         }
 
         return stringBuilder.toString();

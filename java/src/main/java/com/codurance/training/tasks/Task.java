@@ -23,8 +23,7 @@ public final class Task {
         done = false;
     }
 
-    @Override
-    public String toString() {
+    public String format() {
         return String.format("[%c] %d: %s", (done ? 'x' : ' '), id, description);
     }
 }

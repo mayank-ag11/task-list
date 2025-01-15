@@ -34,11 +34,10 @@ public class Projects extends LinkedHashMap<String, Project> {
         return false;
     }
 
-    @Override
-    public String toString() {
+    public String format() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, Project> project : this.entrySet()) {
-            stringBuilder.append(project.getValue());
+            stringBuilder.append(project.getValue().format());
         }
 
         return stringBuilder.toString();

@@ -16,12 +16,12 @@ public class TaskTest {
     }
 
     @Test
-    public void testToStringForADoneTask() {
+    public void testFormatForADoneTask() {
         // Arrange
         Task task = new Task(1, "Task1", true);
 
         // Act
-        String output = task.toString();
+        String output = task.format();
 
         // Assert
         String expectedOutput = "[x] 1: Task1";
@@ -29,12 +29,12 @@ public class TaskTest {
     }
 
     @Test
-    public void testToStringForANotDoneTask() {
+    public void testFormatForANotDoneTask() {
         // Arrange
         Task task = new Task(1, "Task1", false);
 
         // Act
-        String output = task.toString();
+        String output = task.format();
 
         // Assert
         String expectedOutput = "[ ] 1: Task1";

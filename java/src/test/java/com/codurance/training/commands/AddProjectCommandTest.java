@@ -22,6 +22,6 @@ public class AddProjectCommandTest {
                 "",
                 ""
         );
-        assertEquals(expectedOutput, projects.toString());
+        assertEquals(expectedOutput, projects.format());
     }
 }
