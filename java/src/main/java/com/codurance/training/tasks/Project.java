@@ -1,27 +1,27 @@
 package com.codurance.training.tasks;
 
-public class Project {
+class Project {
     private final Tasks tasks;
     private final String name;
 
-    public Project(String name) {
+    Project(String name) {
         this.name = name;
         this.tasks = new Tasks();
     }
 
-    public void addTask(Task task) {
+    void addTask(Task task) {
         tasks.add(task);
     }
 
-    public boolean markTaskByIdAsDone(int id) {
+    boolean markTaskByIdAsDone(int id) {
         return tasks.markTaskByIdAsDone(id);
     }
 
-    public boolean markTaskByIdAsUnDone(int id) {
+    boolean markTaskByIdAsUnDone(int id) {
         return tasks.markTaskByIdAsUnDone(id);
     }
 
-    public String format() {
+    String format() {
         return name + System.lineSeparator()
                 + tasks.format("    ") + System.lineSeparator();
     }

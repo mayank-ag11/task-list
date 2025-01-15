@@ -11,19 +11,19 @@ public final class Task {
         this.done = done;
     }
 
-    public boolean hasId(int id) {
+    boolean hasId(int id) {
         return this.id == id;
     }
 
-    public void markAsDone() {
+    void markAsDone() {
         done = true;
     }
 
-    public void markAsUnDone() {
+    void markAsUnDone() {
         done = false;
     }
 
-    public String format() {
+    String format() {
         return String.format("[%c] %d: %s", (done ? 'x' : ' '), id, description);
     }
 }
