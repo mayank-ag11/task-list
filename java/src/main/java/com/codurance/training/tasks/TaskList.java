@@ -35,7 +35,9 @@ public final class TaskList implements Runnable {
         commandHandlers.put("show", args -> {
             new ShowCommand(projects, out).execute();
         });
-        commandHandlers.put("add", this::add);
+        commandHandlers.put("add", args -> {
+            new AddCommand(projects, out).execute(args);
+        });
         commandHandlers.put("check", args -> {
             new CheckCommand(projects, out).execute(args);
         });
@@ -76,17 +78,6 @@ public final class TaskList implements Runnable {
         }
         else {
             error(command);
-        }
-    }
-
-    private void add(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
-        String subcommand = subcommandRest[0];
-        if (subcommand.equals("project")) {
-            new AddProjectCommand(projects).execute(subcommandRest[1]);
-        } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            new AddTaskCommand(projects, out).execute(projectTask[0], projectTask[1]);
         }
     }
 

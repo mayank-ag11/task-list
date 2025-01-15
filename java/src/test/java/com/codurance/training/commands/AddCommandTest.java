@@ -1,7 +1,6 @@
 package com.codurance.training.commands;
 
 import com.codurance.training.tasks.Projects;
-import com.codurance.training.tasks.Task;
 import com.codurance.training.tasks.TestStringNewLineUtils;
 import org.junit.Test;
 
@@ -10,21 +9,42 @@ import java.io.StringWriter;
 
 import static org.junit.Assert.assertEquals;
 
-public class UncheckCommandTest {
+public class AddCommandTest {
     @Test
-    public void executeUnCheckCommandToUnCheckATask() {
+    public void executeAddCommandToAddAProject() {
         // Arrange
         Projects projects = new Projects();
-        projects.addProject("TestProject");
-        projects.addTaskToProjectWithName("TestProject", new Task(1, "Task1", true));
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
 
-        UncheckCommand uncheckCommand = new UncheckCommand(projects, printWriter);
+        AddCommand addCommand = new AddCommand(projects, printWriter);
 
         // Act
-        uncheckCommand.execute("1");
+        addCommand.execute("project TestProject");
+
+        // Assert
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
+                "TestProject",
+                "",
+                ""
+        );
+        assertEquals(expectedOutput, projects.format());
+    }
+
+    @Test
+    public void executeAddTaskCommandToAddATask() {
+        // Arrange
+        Projects projects = new Projects();
+        projects.addProject("TestProject");
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        AddCommand addCommand = new AddCommand(projects, printWriter);
+
+        // Act
+        addCommand.execute("task TestProject Task1");
 
         // Assert
         String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
@@ -34,28 +54,5 @@ public class UncheckCommandTest {
                 ""
         );
         assertEquals(expectedOutput, projects.format());
-    }
-
-    //TODO missing abstraction in uncheckcommand - test
-    @Test
-    public void executeUnCheckCommandToUnCheckANonExistingTask() {
-        // Arrange
-        Projects projects = new Projects();
-        projects.addProject("TestProject");
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-
-        UncheckCommand uncheckCommand = new UncheckCommand(projects, printWriter);
-
-        // Act
-        uncheckCommand.execute("1");
-
-        // Assert
-        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
-                "Could not find a task with an ID of 1.",
-                ""
-        );
-        assertEquals(expectedOutput, stringWriter.toString());
     }
 }
