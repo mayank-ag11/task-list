@@ -14,7 +14,7 @@ public class ProjectsTest {
         projects.addProject("TestProject");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 ""
         );
@@ -31,7 +31,7 @@ public class ProjectsTest {
         projects.addProject("TestProject2");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "",
                 "TestProject2",
@@ -51,7 +51,7 @@ public class ProjectsTest {
 
         // Assert
         assertTrue(taskAddedSuccessfully);
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 ""
@@ -83,7 +83,7 @@ public class ProjectsTest {
         projects.markTaskByIdAsDone(1);
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 ""
@@ -102,7 +102,7 @@ public class ProjectsTest {
         projects.markTaskByIdAsUnDone(1);
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 ""
@@ -139,7 +139,7 @@ public class ProjectsTest {
         projects.get("TestProject").addTask(new Task(1, "Task1", true));
 
         // Act & Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 ""
@@ -159,7 +159,7 @@ public class ProjectsTest {
         projects.get("TestProject2").addTask(new Task(2, "Task2", true));
 
         // Act & Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 "",

@@ -2,7 +2,7 @@ package com.codurance.training.commands;
 
 import com.codurance.training.tasks.Projects;
 import com.codurance.training.tasks.Task;
-import com.codurance.training.tasks.TestUtils;
+import com.codurance.training.tasks.TestStringNewLineUtils;
 import org.junit.Test;
 
 import java.io.PrintWriter;
@@ -27,7 +27,7 @@ public class CheckCommandTest {
         checkCommand.execute("1");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 "",
@@ -36,6 +36,7 @@ public class CheckCommandTest {
         assertEquals(expectedOutput, projects.toString());
     }
 
+    //TODO missing abstraction in checkcommand - test
     @Test
     public void executeCheckCommandToCheckANonExistingTask() {
         // Arrange
@@ -51,7 +52,7 @@ public class CheckCommandTest {
         checkCommand.execute("1");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "Could not find a task with an ID of 1.",
                 ""
         );

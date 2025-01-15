@@ -2,7 +2,7 @@ package com.codurance.training.commands;
 
 import com.codurance.training.tasks.Projects;
 import com.codurance.training.tasks.Task;
-import com.codurance.training.tasks.TestUtils;
+import com.codurance.training.tasks.TestStringNewLineUtils;
 import org.junit.Test;
 
 import java.io.*;
@@ -25,7 +25,7 @@ public class ShowCommandTest {
         showCommand.execute();
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "",
                 ""
@@ -50,7 +50,7 @@ public class ShowCommandTest {
         showCommand.execute();
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 "    [ ] 2: Task2",
@@ -79,7 +79,7 @@ public class ShowCommandTest {
         showCommand.execute();
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 "    [ ] 2: Task2",
@@ -109,7 +109,7 @@ public class ShowCommandTest {
         showCommand.execute();
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 "",

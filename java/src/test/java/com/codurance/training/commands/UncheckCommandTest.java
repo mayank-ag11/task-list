@@ -2,7 +2,7 @@ package com.codurance.training.commands;
 
 import com.codurance.training.tasks.Projects;
 import com.codurance.training.tasks.Task;
-import com.codurance.training.tasks.TestUtils;
+import com.codurance.training.tasks.TestStringNewLineUtils;
 import org.junit.Test;
 
 import java.io.PrintWriter;
@@ -27,7 +27,7 @@ public class UncheckCommandTest {
         uncheckCommand.execute("1");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 "",
@@ -51,7 +51,7 @@ public class UncheckCommandTest {
         uncheckCommand.execute("1");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "Could not find a task with an ID of 1.",
                 ""
         );

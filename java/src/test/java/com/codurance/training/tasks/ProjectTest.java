@@ -14,7 +14,7 @@ public class ProjectTest {
         project.addTask(new Task(1, "Task1", true));
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 ""
@@ -32,7 +32,7 @@ public class ProjectTest {
         project.markTaskByIdAsDone(1);
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [x] 1: Task1",
                 ""
@@ -50,7 +50,7 @@ public class ProjectTest {
         project.markTaskByIdAsUnDone(1);
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 ""
@@ -65,7 +65,7 @@ public class ProjectTest {
         project.addTask(new Task(1, "Task1", false));
 
         // Act & Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 ""
@@ -81,7 +81,7 @@ public class ProjectTest {
         project.addTask(new Task(2, "Task2", false));
 
         // Act & Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "TestProject",
                 "    [ ] 1: Task1",
                 "    [ ] 2: Task2",

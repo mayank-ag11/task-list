@@ -1,7 +1,7 @@
 package com.codurance.training.commands;
 
 import com.codurance.training.tasks.Projects;
-import com.codurance.training.tasks.TestUtils;
+import com.codurance.training.tasks.TestStringNewLineUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,7 +17,7 @@ public class AddProjectCommandTest {
         addProjectCommand.execute("TestProject");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithoutTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithoutTrailingLineSeparator(
                 "TestProject",
                 "",
                 ""

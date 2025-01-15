@@ -30,7 +30,7 @@ public class TasksTest {
         String output = tasks.format("");
 
         // Assert
-        String expectedOutput = TestUtils.joinWithTrailingLineSeparator(
+        String expectedOutput = TestStringNewLineUtils.joinWithTrailingLineSeparator(
                 "[ ] 1: Task1",
                 "[ ] 2: Task2"
         );
